@@ -13,6 +13,9 @@ var app = express();
 var port = process.env.PORT || 3000;
 var crypto = require('crypto');
 var fs = require('fs');
+var favicon = require('serve-favicon');
+
+app.use(favicon(__dirname + './../public/favicon.ico'));
 
 hbs.registerPartials(path.join(__dirname, '../views/partials'));
 app.set('view engine', 'hbs');
@@ -42,6 +45,13 @@ var storage = multer.diskStorage({
 
 // Define a storage of the image path
 var upload = multer({storage: storage});
+
+app.get('/', (req, res) => {
+  res.render('homepage.hbs', {
+    pageTitle: "Home Page",
+    currentYear: new Date().getFullYear()
+  });
+});
 
 // Define a helper function by handlebars
 hbs.registerHelper('getCurrentYear', () => {
@@ -89,12 +99,6 @@ app.post('/createBook', upload.single('image'), (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
-  res.render('homepage.hbs', {
-    pageTitle: "Home Page",
-    currentYear: new Date().getFullYear()
-  });
-});
 
 app.get('/test', (req, res) => {
   Book.find().then((books) => {
@@ -183,9 +187,6 @@ app.post('/Book/update', (req, res) => {
     console.log('Unable to fetch data');
   });
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`The server is on port ${port}`);
