@@ -30,10 +30,6 @@
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.9",
     "multer": "^1.2.1",
-    "start": "node server",
-    "stylus": "^0.54.5",
-    "watch": "npm run clean && npm run watch-css & nodemon server -e js,jade",
-    "watch-css": "stylus source/stylesheets/index.styl -o static/css -w"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
