@@ -10,7 +10,7 @@ var {Book} = require('./models/books');
 var {User} = require('./models/user');
 var multer = require('multer');
 var app = express();
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
 var crypto = require('crypto');
 var fs = require('fs');
 
@@ -18,7 +18,7 @@ hbs.registerPartials(path.join(__dirname, '../views/partials'));
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + './../public'));
 
-app.use((req, res, nex) => {
+app.use((req, res, next) => {
   var now = new Date().toString();
   var log = `${now}: ${req.method} ${req.url}`;
 
