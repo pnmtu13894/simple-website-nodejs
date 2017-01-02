@@ -29,7 +29,7 @@
     "method-override": "^2.3.7",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.9",
-    "multer": "^1.2.1",
+    "multer": "^1.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
