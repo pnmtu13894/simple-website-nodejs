@@ -1,8 +1,7 @@
 {
   "name": "simple-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "server/server.js",
+  "main": "index.js",
   "engine": {
     "node": "6.9.1",
     "npm": "3.10.8"
