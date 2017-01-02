@@ -30,6 +30,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 // Define a destination for uploaded image
 var storage = multer.diskStorage({
   destination: 'public/img/',
@@ -42,16 +47,9 @@ var storage = multer.diskStorage({
     })
   }
 });
-
 // Define a storage of the image path
 var upload = multer({storage: storage});
 
-app.get('/', (req, res) => {
-  res.render('homepage.hbs', {
-    pageTitle: "Home Page",
-    currentYear: new Date().getFullYear()
-  });
-});
 
 // Define a helper function by handlebars
 hbs.registerHelper('getCurrentYear', () => {
@@ -63,11 +61,15 @@ hbs.registerHelper('makeUppercase', (message) =>{
   return message.toUpperCase();
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+//Homepage
+app.get('/', (req, res) => {
+  res.render('homepage.hbs', {
+    pageTitle: "Home Page",
+    currentYear: new Date().getFullYear()
+  });
+});
 
+//GET method to get data in website
 app.get('/createBook', (req, res) => {
    Book.find().sort({_id: -1}).then((books) => {
     res.render('createBook.hbs', {
@@ -79,6 +81,7 @@ app.get('/createBook', (req, res) => {
   });
 });
 
+//POST method to retrieve data from website
 app.post('/createBook', upload.single('image'), (req, res) => {
   console.log(req.file);
   var book = new Book({
@@ -159,16 +162,18 @@ app.get('/Book/update/:id', (req, res) => {
   Book.findById({
     _id: new ObjectID(id)
   }).then((cBook) => {
+    imagePath = path.join('./../../img', cBook.image);
     res.render('updateBook.hbs', {
       currentBook: cBook,
-      pageTitle: 'Update book'
+      pageTitle: 'Update book',
+      currentImage: imagePath
     });
   }, (e) => {
     console.log('Unable to fetch data');
   });
 });
 
-app.post('/Book/update', (req, res) => {
+app.post('/Book/update', upload.single('image'), (req, res) => {
   var id = req.body.id;
   if(!ObjectID.isValid(id)){
     res.status(404).send();
@@ -180,8 +185,14 @@ app.post('/Book/update', (req, res) => {
     author: req.body.author,
     type: req.body.type,
     time: new Date(),
-    price: req.body.price
+    price: req.body.price,
+    image: req.file.filename
   }).then((cbook) => {
+    fs.unlink(path.join('public/img', cbook.image), (err) => {
+      if(err){
+        console.log('Unable to delete image')
+      }
+    });
     res.redirect('/createBook');
   }, (e) => {
     console.log('Unable to fetch data');
