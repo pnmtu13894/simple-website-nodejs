@@ -3,6 +3,7 @@ const hbs = require('hbs');
 const path = require('path');
 const {ObjectID} = require('mongodb');
 const bodyParser = require('body-parser');
+const CONCURRENCY = process.env.WEB_CONCURRENCY || 1;
 
 var {mongoose} = require('./mongodb/mongodb-connect');
 var {Book} = require('./models/books');

@@ -23,6 +23,7 @@
     "crypto-js": "^3.1.9-1",
     "express": "^4.14.0",
     "express-method-override": "0.0.3",
+    "foobar": "1.1.0",
     "gridfs-stream": "^1.1.1",
     "hbs": "^4.0.0",
     "lodash": "^4.15.0",
@@ -37,5 +38,15 @@
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnmtu13894/simple-website-nodejs.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/pnmtu13894/simple-website-nodejs/issues"
+  },
+  "homepage": "https://github.com/pnmtu13894/simple-website-nodejs#readme",
+  "description": ""
 }
