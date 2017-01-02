@@ -16,8 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "build": "npm run clean && npm run build-css",
-    "build-css": "stylus source/stylesheets/index.styl -o static/css",
     "clean": "rm -rf static/css && mkdir -p static/css",
     "crypto-js": "^3.1.9-1",
     "express": "^4.14.0",
