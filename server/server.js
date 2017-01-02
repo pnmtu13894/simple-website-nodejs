@@ -17,6 +17,15 @@ hbs.registerPartials(path.join(__dirname, '../views/partials'));
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + './../public'));
 
+app.use((req, res, nex) => {
+  var now = new Date().toString();
+  var log = `${now}: ${req.method} ${req.url}`;
+
+  console.log(log);
+  fs.appendFile('server.log', log + '\n');
+  next();
+});
+
 // Define a destination for uploaded image
 var storage = multer.diskStorage({
   destination: 'public/img/',
