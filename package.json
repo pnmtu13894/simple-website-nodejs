@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "nodemon server/server.js -e js,hbs"
   },
   "engines": {
     "node": "6.9.1"
