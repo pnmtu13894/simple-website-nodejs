@@ -2,15 +2,16 @@
   "name": "simple-website",
   "version": "1.0.0",
   "main": "index.js",
-  "engine": {
+  "engines": {
     "node": "6.9.1",
     "npm": "3.10.8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js -e js,hbs",
+    "start": "nodemon server/server.js",
     "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
-    "heroku-postbuild": "echo This runs afterwards."
+    "heroku-postbuild": "echo This runs afterwards.",
+    "postinstall": "bower install && grunt build"
   },
   "author": "",
   "license": "ISC",
