@@ -1,0 +1,11 @@
+{{> header}}
+    <h1>{{pageTitle}}</h1>
+    <p>
+      {{cBooks.length}}
+    </p>
+    {{#cBooks}}
+      <p>
+        {{title}}: {{author}}
+      </p>
+    {{/cBooks}}
+{{> footer}}
